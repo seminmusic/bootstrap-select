@@ -2184,7 +2184,10 @@
                 );
 
             that.$bsContainer.addClass($element.attr('class').replace(/form-control|fit-width/gi, '')).toggleClass(classNames.DROPUP, $element.hasClass(classNames.DROPUP));
-            pos = $element.offset();
+
+            var $inputGroupElement = $element.closest('.input-group').first();
+
+            pos = $inputGroupElement.length ? $inputGroupElement.offset() : $element.offset();
 
             if (!$container.is('body')) {
               containerPos = $container.offset();
@@ -2194,7 +2197,7 @@
               containerPos = { top: 0, left: 0 };
             }
 
-            actualHeight = $element.hasClass(classNames.DROPUP) ? 0 : $element[0].offsetHeight;
+            actualHeight = $element.hasClass(classNames.DROPUP) ? 0 : ($inputGroupElement.length ? $inputGroupElement[0].getBoundingClientRect().height : $element[0].offsetHeight);
 
             // Bootstrap 4+ uses Popper for menu positioning
             if (version.major < 4 || display === 'static') {
@@ -2202,7 +2205,7 @@
               containerPosition.left = pos.left - containerPos.left;
             }
 
-            containerPosition.width = $element[0].offsetWidth;
+            containerPosition.width = $inputGroupElement.length ? $inputGroupElement[0].getBoundingClientRect().width : $element[0].offsetWidth;
 
             that.$bsContainer.css(containerPosition);
           };
