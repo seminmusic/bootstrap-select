@@ -51,7 +51,8 @@ module.exports = function (grunt) {
       },
       main: {
         src: 'js/<%= pkg.name %>.js',
-        dest: 'dist/js/<%= pkg.name %>.js',
+        // dest: 'dist/js/<%= pkg.name %>.js',
+        dest: 'dist/js/<%= pkg.name %>' + '-custom' + '.js',
         options: {
           banner: '<%= banner %>\n' + grunt.file.read('js/umd-intro.js'),
           footer: grunt.file.read('js/umd-outro.js')
@@ -80,11 +81,13 @@ module.exports = function (grunt) {
       },
       main: {
         src: '<%= concat.main.dest %>',
-        dest: 'dist/js/<%= pkg.name %>.min.js',
+        // dest: 'dist/js/<%= pkg.name %>.min.js',
+        dest: 'dist/js/<%= pkg.name %>' + '-custom' + '.min.js',
         options: {
           sourceMap: true,
           sourceMapIncludeSources: true,
-          sourceMapIn: 'dist/js/<%= pkg.name %>.js.map'
+          // sourceMapIn: 'dist/js/<%= pkg.name %>.js.map'
+          sourceMapIn: 'dist/js/<%= pkg.name %>' + '-custom' + '.js.map'
         }
       },
       i18n: {
