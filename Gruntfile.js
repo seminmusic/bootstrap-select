@@ -50,7 +50,8 @@ module.exports = function (grunt) {
         sourceMap: true
       },
       main: {
-        src: 'js/<%= pkg.name %>.js',
+        // src: 'js/<%= pkg.name %>.js',
+        src: 'dist/js/source/<%= pkg.name %>.js',
         // dest: 'dist/js/<%= pkg.name %>.js',
         dest: 'dist/js/<%= pkg.name %>' + '-custom' + '.js',
         options: {
@@ -121,6 +122,13 @@ module.exports = function (grunt) {
     },
 
     copy: {
+      jsSource: {
+        expand: true,
+        src: 'js/bootstrap-select.js',
+        dest: 'dist/js/source/',
+        flatten: true,
+        filter: 'isFile'
+      },
       docs: {
         expand: true,
         cwd: 'dist/',
@@ -276,7 +284,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build-css', ['clean:css', 'less', 'postcss', 'usebanner:css', 'cssmin']);
 
   // JS distribution
-  grunt.registerTask('build-js', ['clean:js', 'eslint', 'concat', 'uglify']);
+  grunt.registerTask('build-js', ['clean:js', 'eslint', 'copy:jsSource', 'concat', 'uglify']);
 
   // Copy dist to docs
   grunt.registerTask('copy-docs', ['clean:docs', 'copy:docs']);
