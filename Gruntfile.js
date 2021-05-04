@@ -20,8 +20,8 @@ module.exports = function (grunt) {
 
     clean: {
       css: 'dist/css',
-      js: 'dist/js',
-      docs: 'docs/docs/dist'
+      js: 'dist/js'
+      // docs: 'docs/docs/dist'
     },
 
     eslint: {
